@@ -35,12 +35,13 @@ public class Event implements Comparable<Event> {
 
     /**
      * Tests if an event occurs on a given day
+     * 
      * @param aDay the day to test
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
         LocalDate myEnd = this.myStart.plus(myDuration).toLocalDate();
-        // si même jour et même année
+        // si compris dans la date de fin et de debut --> true
         return aDay.isEqual(this.myStart.toLocalDate()) || (aDay.isAfter(this.myStart.toLocalDate()) && aDay.isBefore(myEnd) || aDay.isEqual(myEnd));
     }
    
