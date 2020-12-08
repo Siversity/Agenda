@@ -9,15 +9,19 @@ import java.util.*;
 public class Agenda {
     
     // Attributs
-    private TreeSet<Event> myAgenda;
+    private LinkedList<Event> myAgenda;
     
     
     // Constructeur
     public Agenda() {
-        myAgenda = new TreeSet<>();
+        
+        myAgenda = new LinkedList<>();
     }
     
     public void addEvent(Event e) {
+        if (e.equals(null)) {
+            throw new NullPointerException("Event can't be null");
+        }
         myAgenda.add(e);
     }
 
