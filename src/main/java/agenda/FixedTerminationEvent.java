@@ -14,7 +14,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     
     // Attributs
     private long numberOfOccurrences;
-    private LocalDate terminaisonInclusive;
+    private LocalDate fin;
 
     
     /**
@@ -33,15 +33,15 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
         super(title, start, duration, frequency);
-        this.terminaisonInclusive = terminationInclusive;
-        this.terminaisonInclusive = terminaisonInclusive;
+        this.fin = terminationInclusive;
         
         switch(this.getFrequency()) {
             case DAYS :
-                this.numberOfOccurrences = ChronoUnit.DAYS.between(start, terminaisonInclusive);
+                this.numberOfOccurrences = ChronoUnit.DAYS.between(start.toLocalDate(), terminationInclusive);
             case WEEKS :
-                this.numberOfOccurrences = ChronoUnit.WEEKS.between(start, terminaisonInclusive);
-                
+                this.numberOfOccurrences = ChronoUnit.WEEKS.between(start.toLocalDate(), terminationInclusive);
+            case MONTHS :
+                this.numberOfOccurrences = ChronoUnit.MONTHS.between(start.toLocalDate(), terminationInclusive);
         }
         
         
@@ -64,7 +64,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, long numberOfOccurrences) {
         super(title, start, duration, frequency);
         this.numberOfOccurrences = numberOfOccurrences;
-        this.terminaisonInclusive=toDate(numberOfOccurrences);
+        this.fin = toDate(numberOfOccurrences);
     }
 
     /**
@@ -72,7 +72,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * @return the termination date of this repetitive event
      */
     public LocalDate getTerminationDate() {
-        return terminaisonInclusive;  
+        return fin;
     }
 
     public long getNumberOfOccurrences() {
@@ -100,7 +100,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     
     @Override
     public boolean isInDay(LocalDate aDay) {
-        if(this.myExceptions.contains(aDay) || (aDay.isAfter(terminaisonInclusive))) {
+        if(this.myExceptions.contains(aDay) || (aDay.isAfter(fin))) {
             return false;
         }
         switch(this.myFrequency){
