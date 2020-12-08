@@ -2,7 +2,7 @@ package agenda;
 
 import java.time.*;
 
-public class Event {
+public class Event implements Comparable<Event> {
 
     /**
      * The myTitle of this event
@@ -71,6 +71,18 @@ public class Event {
         return myTitle;
     }
     
+    
+    @Override
+    public int compareTo(Event e) {
+        int ret = 0;
+        if (this.myStart.compareTo(e.getStart()) < 0) {
+            ret = -1;
+        }
+        if (this.myStart.compareTo(e.getStart()) > 0) {
+            ret = 1;
+        }
+        return ret;
+    }
    
     
 }
