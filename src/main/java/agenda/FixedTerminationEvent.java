@@ -34,6 +34,16 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
         super(title, start, duration, frequency);
         this.terminaisonInclusive = terminaisonInclusive;
+        
+        switch(this.getFrequency()) {
+            case DAYS :
+                this.numberOfOccurrences = ChronoUnit.DAYS.between(start, terminaisonInclusive);
+            case WEEKS :
+                this.numberOfOccurrences = ChronoUnit.WEEKS.between(start, terminaitionInclusive);
+                
+        }
+        
+        
     }
 
     /**
@@ -70,12 +80,19 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     
     @Override
     public boolean isInDay(LocalDate aDay) {
-        int second = 0;
-        int minute = 0;
-        int hour = 0;
-        int day = 0;
-        int week = 0;
-        int month = 0;
+        if(this.myExceptions.contains(aDay) || (aDay.isAfter(terminaisonInclusive))) {
+            return false;
+        }
+        switch(this.myFrequency){
+            case DAYS:
+                return ( aDay.isEqual(this.getStart().toLocalDate())) ||((aDay.isAfter(this.getStart().toLocalDate())));
+            case WEEKS:
+               return ( ( aDay.isEqual(this.getStart().toLocalDate())) ||((aDay.isAfter(this.getStart().toLocalDate()))) && (aDay.getDayOfWeek()==this.getStart().getDayOfWeek()));
+            case MONTHS:
+                return ( ( aDay.isEqual(this.getStart().toLocalDate())) ||((aDay.isAfter(this.getStart().toLocalDate()))) && (aDay.getDayOfMonth()==this.getStart().getDayOfMonth()));
+            default:
+                return false;
+        }
     }
         
 }
