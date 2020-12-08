@@ -33,6 +33,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
         super(title, start, duration, frequency);
+        verifDate(start.toLocalDate(), terminationInclusive);
         this.fin = terminationInclusive;
         
         if (this.getFrequency().equals(ChronoUnit.DAYS)) {
@@ -63,8 +64,13 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, long numberOfOccurrences) {
         super(title, start, duration, frequency);
-        this.numberOfOccurrences = numberOfOccurrences;
+        this.setNumberOfOccurrences(numberOfOccurrences);
         this.fin = toDate(numberOfOccurrences);
+    }
+    
+    public void verifDate(LocalDate dbt, LocalDate fin){
+        if (dbt.isAfter(fin))
+            throw new UnsupportedOperationException("Fin avant le début");
     }
 
     /**
@@ -77,6 +83,12 @@ public class FixedTerminationEvent extends RepetitiveEvent {
 
     public long getNumberOfOccurrences() {
         return numberOfOccurrences;
+    }
+    
+    public void setNumberOfOccurrences(long occ){
+        if (occ<0)
+            throw new UnsupportedOperationException("Le nombre d'occurence est négatif");
+        this.numberOfOccurrences=occ;
     }
     
     /**

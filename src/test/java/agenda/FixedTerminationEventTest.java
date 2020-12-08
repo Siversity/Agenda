@@ -67,13 +67,10 @@ public class FixedTerminationEventTest {
         assertFalse(fixedTermination.isInDay(nov_1_2020.plus(4, ChronoUnit.WEEKS)), "Cet événement ne se produit pas à W+4");
     }
     
-<<<<<<< HEAD
     @Test
     public void occurenceZero(){
         FixedTerminationEvent fixedRepetition = new FixedTerminationEvent("Fixed termination daily", nov_1__2020_22_30, min_120, ChronoUnit.DAYS, 0);
         assertEquals(nov_1_2020, fixedRepetition.getTerminationDate(), "Avec un nombre d'occurence nul, la date de termination est censé être la date de départ");
     }
 
-=======
->>>>>>> 6b43a0779a4fc6096da438c5de61bbf3b02304cb
 }

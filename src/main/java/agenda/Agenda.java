@@ -9,12 +9,12 @@ import java.util.*;
 public class Agenda {
     
     // Attributs
-    private TreeSet<Event> myAgenda;
+    private LinkedList<Event> myAgenda;
     
     
     // Constructeur
     public Agenda() {
-        myAgenda = new TreeSet<>();
+        myAgenda = new LinkedList<>();
     }
     
     public void addEvent(Event e) {
