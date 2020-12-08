@@ -33,13 +33,14 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
         super(title, start, duration, frequency);
+        this.terminaisonInclusive = terminationInclusive;
         this.terminaisonInclusive = terminaisonInclusive;
         
         switch(this.getFrequency()) {
             case DAYS :
                 this.numberOfOccurrences = ChronoUnit.DAYS.between(start, terminaisonInclusive);
             case WEEKS :
-                this.numberOfOccurrences = ChronoUnit.WEEKS.between(start, terminaitionInclusive);
+                this.numberOfOccurrences = ChronoUnit.WEEKS.between(start, terminaisonInclusive);
                 
         }
         
@@ -63,6 +64,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, long numberOfOccurrences) {
         super(title, start, duration, frequency);
         this.numberOfOccurrences = numberOfOccurrences;
+        this.terminaisonInclusive=toDate(numberOfOccurrences);
     }
 
     /**
@@ -77,6 +79,24 @@ public class FixedTerminationEvent extends RepetitiveEvent {
         return numberOfOccurrences;
     }
     
+    /**
+     * Convertit un nombre d'occurence en une date précise
+     * @param o 
+     * @return  l : la date de fin
+     */
+    public LocalDate toDate(long o){
+        LocalDate l=null;
+        switch(this.myFrequency){
+            case DAYS:
+                l=this.getStart().plusDays(o).toLocalDate();
+            case WEEKS:
+                l=this.getStart().plusWeeks(o).toLocalDate();
+            case MONTHS:
+                l=this.getStart().plusMonths(o).toLocalDate();
+            default:
+                break;        }
+        return l;
+    }
     
     @Override
     public boolean isInDay(LocalDate aDay) {
