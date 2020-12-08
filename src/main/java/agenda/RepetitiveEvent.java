@@ -35,14 +35,24 @@ public class RepetitiveEvent extends Event {
      * @param date the event will not occur at this date
      */
     public void addException(LocalDate date) {
-        isInDay(date);
+        this.myExceptions.add(date);
     }
 
     @Override
     public boolean isInDay(LocalDate aDay) {
         if(this.myExceptions.contains(aDay))
             return false;
-        return super.isInDay(aDay); 
+        switch(this.myFrequency){
+            case DAYS:
+                return ( aDay.isEqual(this.getStart().toLocalDate())) ||((aDay.isAfter(this.getStart().toLocalDate())));
+            case WEEKS:
+               return ( ( aDay.isEqual(this.getStart().toLocalDate())) ||((aDay.isAfter(this.getStart().toLocalDate()))) && (aDay.getDayOfWeek()==this.getStart().getDayOfWeek()));
+            case MONTHS:
+                return ( ( aDay.isEqual(this.getStart().toLocalDate())) ||((aDay.isAfter(this.getStart().toLocalDate()))) && (aDay.getDayOfMonth()==this.getStart().getDayOfMonth()));
+            default:
+                return false;
+        }
+        
     }
      
     /**
