@@ -34,12 +34,7 @@ public class Calendrier {
         
         a.addEvent(e1);
         a.addEvent(e2);
-        
-        System.out.println(e1.compareTo(e2));
-        
-        
-        
-        
+
         
     }
     

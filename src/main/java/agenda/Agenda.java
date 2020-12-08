@@ -18,6 +18,9 @@ public class Agenda {
     }
     
     public void addEvent(Event e) {
+        if (e.equals(null)) {
+            throw new NullPointerException("Event can't be null");
+        }
         myAgenda.add(e);
     }
 
