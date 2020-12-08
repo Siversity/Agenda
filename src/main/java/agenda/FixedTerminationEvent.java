@@ -76,11 +76,6 @@ public class FixedTerminationEvent extends RepetitiveEvent {
         int day = 0;
         int week = 0;
         int month = 0;
-        if (this.getFrequency().equals(ChronoUnit.DAYS)) {
-            
-            hour = this.getStart().getHour();
-            Object a = this.getStart().get
-        }
     }
         
 }
