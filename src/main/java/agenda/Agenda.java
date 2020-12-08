@@ -9,16 +9,16 @@ import java.util.*;
 public class Agenda {
     
     // Attributs
-    private TreeSet<Event> monAgenda;
+    private TreeSet<Event> myAgenda;
     
     
     // Constructeur
     public Agenda() {
-        monAgenda = new TreeSet<>();
+        myAgenda = new TreeSet<>();
     }
     
     public void addEvent(Event e) {
-        monAgenda.add(e);
+        myAgenda.add(e);
     }
 
     /**
@@ -28,12 +28,12 @@ public class Agenda {
      * @return and iteraror to the events that occur on that day
      */
     public ArrayList<Event> eventsInDay(LocalDate day) {
-        ArrayList<Event> maListe = new ArrayList<>();
-        for (Event e : monAgenda) {
+        ArrayList<Event> myList = new ArrayList<>();
+        for (Event e : myAgenda) {
             if (e.getStart().equals(day)) {
-                maListe.add(e);
+                myList.add(e);
             }
         }
-        return maListe;
+        return myList;
     }
 }

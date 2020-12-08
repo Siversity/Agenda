@@ -81,6 +81,9 @@ public class Event implements Comparable<Event> {
         if (this.myStart.compareTo(e.getStart()) > 0) {
             ret = 1;
         }
+        if (this.myStart.compareTo(e.getStart()) == 0) {
+            ret = 0;
+        }
         return ret;
     }
    

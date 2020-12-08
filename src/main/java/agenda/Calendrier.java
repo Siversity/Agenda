@@ -21,16 +21,21 @@ public class Calendrier {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Duration d1 = new Duration(12, 1);
+        Duration d1 = Duration.ofDays(1);
+        Duration d2 = Duration.ofMinutes(120);
+        
+        LocalDateTime d = LocalDateTime.of(2020, 8 , 12, 22, 30);
         
         Agenda a = new Agenda();
-        Event e1 = new Event("Aniiversaire 1", LocalDateTime.of(2020, 08 , 12), Duration.ofMinutes(120));
+        Event e1 = new Event("Aniiversaire 1", LocalDateTime.of(2020, 8, 13, 22, 29), d2);
         
-        Event e2 = new Event("RDV 2", LocalDateTime.of(2020, 08, 13, 22, 30), Duration.ofMinutes(60));
+        Event e2 = new Event("RDV 2", LocalDateTime.of(2020, 8, 13, 22, 30), d2);
         
         
         a.addEvent(e1);
         a.addEvent(e2);
+        
+        System.out.println(e1.compareTo(e2));
         
         
     }
