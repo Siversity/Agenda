@@ -35,13 +35,13 @@ public class Event {
 
     /**
      * Tests if an event occurs on a given day
-     *
      * @param aDay the day to test
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        LocalDate myEnd = this.myStart.plus(myDuration).toLocalDate();
+        // si même jour et même année
+        return aDay.isEqual(this.myStart.toLocalDate()) || (aDay.isAfter(this.myStart.toLocalDate()) && aDay.isBefore(myEnd) || aDay.isEqual(myEnd));
     }
    
     /**
@@ -66,6 +66,11 @@ public class Event {
         return myDuration;
     }
 
+    @Override
+    public String toString() {
+        return myTitle;
+    }
+    
    
     
 }
