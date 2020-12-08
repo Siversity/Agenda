@@ -3,6 +3,7 @@ package agenda;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -10,6 +11,10 @@ import java.time.temporal.ChronoUnit;
  * a given number of occurrences
  */
 public class FixedTerminationEvent extends RepetitiveEvent {
+    
+    // Attributs
+    private long numberOfOccurrences;
+    private LocalDate terminaisonInclusive;
 
     
     /**
@@ -27,10 +32,8 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * @param terminationInclusive the date when this event ends
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
-         super(title, start, duration, frequency);
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
-
+        super(title, start, duration, frequency);
+        this.terminaisonInclusive = terminaisonInclusive;
     }
 
     /**
@@ -49,8 +52,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, long numberOfOccurrences) {
         super(title, start, duration, frequency);
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        this.numberOfOccurrences = numberOfOccurrences;
     }
 
     /**
@@ -58,13 +60,27 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * @return the termination date of this repetitive event
      */
     public LocalDate getTerminationDate() {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");   
+        return terminaisonInclusive;  
     }
 
     public long getNumberOfOccurrences() {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        return numberOfOccurrences;
+    }
+    
+    
+    @Override
+    public boolean isInDay(LocalDate aDay) {
+        int second = 0;
+        int minute = 0;
+        int hour = 0;
+        int day = 0;
+        int week = 0;
+        int month = 0;
+        if (this.getFrequency().equals(ChronoUnit.DAYS)) {
+            
+            hour = this.getStart().getHour();
+            Object a = this.getStart().get
+        }
     }
         
 }
