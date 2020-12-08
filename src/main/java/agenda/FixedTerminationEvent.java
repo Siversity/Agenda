@@ -34,23 +34,6 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
         super(title, start, duration, frequency);
         this.fin = terminationInclusive;
-        /*
-        switch(this.getFrequency()) {
-            case DAYS :
-                this.numberOfOccurrences = ChronoUnit.DAYS.between(start.toLocalDate(), terminationInclusive);
-            case WEEKS :
-                this.numberOfOccurrences = ChronoUnit.WEEKS.between(start.toLocalDate(), terminationInclusive);
-                System.out.println("On entre dans la boucle " + numberOfOccurrences);
-                System.out.println(numberOfOccurrences);
-            case MONTHS :
-                this.numberOfOccurrences = ChronoUnit.MONTHS.between(start.toLocalDate(), terminationInclusive);
-                System.out.println("On entre dans MONTHS");
-                System.out.println(numberOfOccurrences);
-            default :
-                break;
-        }
-        System.out.println(numberOfOccurrences); */
-        
         
         if (this.getFrequency().equals(ChronoUnit.DAYS)) {
             this.numberOfOccurrences = ChronoUnit.DAYS.between(start.toLocalDate(), terminationInclusive) + 1;
@@ -103,6 +86,9 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      */
     public LocalDate toDate(long o){
         LocalDateTime l=null;
+        if(o<1){
+        return this.getStart().toLocalDate();
+        }
         switch(this.myFrequency){
             case DAYS:
                 l=this.getStart().plusDays(o-1);
