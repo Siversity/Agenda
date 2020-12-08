@@ -66,5 +66,5 @@ public class FixedTerminationEventTest {
         assertTrue(fixedTermination.isInDay(nov_1_2020.plus(3, ChronoUnit.WEEKS)), "Cet événement se produit toutes les semaines");
         assertFalse(fixedTermination.isInDay(nov_1_2020.plus(4, ChronoUnit.WEEKS)), "Cet événement ne se produit pas à W+4");
     }
-
+    
 }
