@@ -38,7 +38,7 @@ public class FixedTerminationEventTest {
         LocalDate termination = LocalDate.of(2021,1, 3);
         assertEquals(termination, fixedRepetitions.getTerminationDate(), "Cet événement doits se terminer le 3 janvier");
     }
-    
+
     @Test
     public void eventIsInItsStartDay() {
         assertTrue(fixedTermination.isInDay(nov_1_2020), "Un événement a lieu dans son jour de début");
