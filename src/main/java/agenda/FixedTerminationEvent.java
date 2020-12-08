@@ -85,17 +85,22 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * @return  l : la date de fin
      */
     public LocalDate toDate(long o){
-        LocalDate l=null;
+        LocalDateTime l=null;
         switch(this.myFrequency){
             case DAYS:
-                l=this.getStart().plusDays(o).toLocalDate();
+                l=this.getStart().plusDays(o-1);
+                System.out.println(o);
+                break;
             case WEEKS:
-                l=this.getStart().plusWeeks(o).toLocalDate();
+                l=this.getStart().plusWeeks(o-1);
+                break;
             case MONTHS:
-                l=this.getStart().plusMonths(o).toLocalDate();
+                l=this.getStart().plusMonths(o-1);
+                break;
             default:
-                break;        }
-        return l;
+                break;
+        }
+        return l.toLocalDate();
     }
     
     @Override
